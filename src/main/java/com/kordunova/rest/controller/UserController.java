@@ -34,9 +34,8 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<User> addUser(@RequestBody User user){
-        boolean theSameId = users.stream().anyMatch(user1 -> user1.getId() == user.getId());
-        boolean theSameSurname =  users.stream().anyMatch(user1 -> user1.getSurname().equals(user.getSurname()));
-        if( theSameId || theSameSurname){
+        boolean theSameUser =  users.stream().anyMatch(user1 -> user1.getSurname().equals(user.getSurname()) || user1.getId() == user.getId());
+        if(theSameUser){
             return ResponseEntity.badRequest().build();
         }
         
